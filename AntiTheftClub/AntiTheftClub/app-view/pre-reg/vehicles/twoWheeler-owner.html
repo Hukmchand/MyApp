@@ -1,0 +1,193 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <section>
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                        <label for="name">Owner's Name *</label>
+                        <input type="text" class="form-control" required name="Owner_Name" ng-model="formData.OwnerName" />
+                         <div class="errors" ng-if="twoWheelerform.$submitted || twoWheelerform.Owner_Name.$touched" ng-messages="twoWheelerform.Owner_Name.$error" ng-messages-include="OwnerErrors.html">
+                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Owner Type  *</label>
+                        <select class="form-control" required data-ng-options="o.id as o.name for o in ownerTypesOptions" name="Owner_Type" data-ng-model="formData.OwnerType">
+
+                            <option value="">select owner type</option>
+                        </select>
+                         <div class="errors" ng-if="twoWheelerform.$submitted || twoWheelerform.Owner_Type.$touched" ng-messages="twoWheelerform.Owner_Type.$error" ng-messages-include="OwnerErrors.html">
+                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Country *</label>
+                        <select class="form-control" required data-ng-options="o.id as o.name for o in ownerCountryOptions" name="Owner_Country" data-ng-model="formData.OwnerCountry"  ng-change="getStateByCountry(formData.OwnerCountry,'Owner_State')" >
+                            <option value="">select country</option>
+                        </select>
+                         <div class="errors" ng-if="twoWheelerform.$submitted || twoWheelerform.Owner_Country.$touched" ng-messages="twoWheelerform.Owner_Country.$error" ng-messages-include="OwnerErrors.html">
+                         </div>
+                    </div>
+                    <div class="form-group" ng-hide="formData.OwnerCountry != 'IND'">
+                        <label for="email">State *</label>
+                        <select class="form-control" required data-ng-options="o.id as o.name for o in ownerStateOptions" name="Owner_State" required  data-ng-model="formData.OwnerState"   ng-change="getDistricts(formData.OwnerCountry,formData.OwnerState,'Owner_District')" >
+                            <option value="">select state</option>
+                        </select>
+                         <div class="errors" ng-if="twoWheelerform.$submitted || twoWheelerform.Owner_State.$touched" ng-messages="twoWheelerform.Owner_State.$error" ng-messages-include="OwnerErrors.html">
+                         </div>
+                    </div>
+                    <div class="form-group" ng-hide="formData.OwnerCountry != 'IND'">
+                        <label for="email">District *</label>
+                        <select class="form-control" required data-ng-options="o.id as o.name for o in ownerDistrictOptions" name="Owner_District" data-ng-model="formData.OwnerDistrict"   ng-change="getCities(formData.OwnerCountry,formData.OwnerState,formData.OwnerDistrict,'Owner_City')" >
+                            <option value="">select district</option>
+                        </select>
+                         <div class="errors" ng-if="twoWheelerform.$submitted || twoWheelerform.Owner_District.$touched" ng-messages="twoWheelerform.Owner_District.$error" ng-messages-include="OwnerErrors.html">
+                         </div>
+                    </div>
+                    <div class="form-group" ng-hide="formData.OwnerCountry != 'IND'">
+                        <label for="email">City *</label>
+                        <select class="form-control" required data-ng-options="o.id as o.name for o in ownerCityOptions" name="Owner_City" data-ng-model="formData.OwnerCity">
+                            <option value="">select city</option>
+                        </select>
+                         <div class="errors" ng-if="twoWheelerform.$submitted || twoWheelerform.Owner_City.$touched" ng-messages="twoWheelerform.Owner_City.$error" ng-messages-include="OwnerErrors.html">
+                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Address *</label>
+                        <textarea class="form-control" required name="Owner_Address" ng-model="formData.OwnerAddress"></textarea>
+                        <div class="errors" ng-if="twoWheelerform.$submitted || twoWheelerform.Owner_Address.$touched" ng-messages="twoWheelerform.Owner_Address.$error" ng-messages-include="OwnerErrors.html">
+                         </div>
+                    </div>
+                    <div class="form-group" ng-hide="formData.OwnerCountry != 'IND'">
+                        <label for="email">Pincode *label>
+                        <input type="number" class="form-control" required name="Owner_Pincode" ng-model="formData.OwnerPincode" />
+                        <div class="errors" ng-if="twoWheelerform.$submitted || twoWheelerform.Owner_Pincode.$touched" ng-messages="twoWheelerform.Owner_Pincode.$error" ng-messages-include="OwnerErrors.html">
+                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Mobile No *</label>
+                        <input type="tel" class="form-control" placeholder="10 Digits only exclude ISD" required name="Owner_Mobile" ng-model="formData.OwnerMobile"  />
+                        <div class="errors" ng-if="twoWheelerform.$submitted || twoWheelerform.Owner_Mobile.$touched" ng-messages="twoWheelerform.Owner_Mobile.$error" ng-messages-include="OwnerErrors.html"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Alternative Mobile No</label>
+                        <input type="tel" class="form-control" placeholder="10 Digits only exclude ISD" name="OwnerAlternative_Mobile"  notequal-to="formData.OwnerMobile" ng-model="formData.OwnerAlternativeMobile" />
+                         <div class="errors" ng-if="twoWheelerform.$submitted || twoWheelerform.OwnerAlternative_Mobile.$touched" ng-messages="twoWheelerform.OwnerAlternative_Mobile.$error" ng-messages-include="OwnerErrors.html">
+                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Email *</label>
+                        <input type="email" class="form-control" required name="Owner_Email" ng-model="formData.OwnerEmail" />
+                        <div class="errors" ng-if="twoWheelerform.$submitted || twoWheelerform.Owner_Email.$touched" ng-messages="twoWheelerform.Owner_Email.$error" ng-messages-include="OwnerErrors.html">
+                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Owner Photo:</label>
+                        <span class="btn btn-default btn-file">
+                            <input class="imageUploaderControl" type="file" ng-model="formData.OwnerPhoto" id="ownerPhoto" name="owner_Photo" accept="image/*" />
+                        </span>
+                    </div>
+                    <div class="form-group" ng-hide="formData.OwnerType == '1st'">
+                     <h3>   Previous Owner Details </h3>
+                    </div>
+                    <div class="form-group" ng-hide="formData.OwnerType == '1st'">
+                        <label for="name">Owner's Name *</label>
+                        <input type="text" class="form-control" required name="PreviousOwner_Name" ng-model="formData.PreviousOwnerName" />
+                         <div class="errors" ng-if="twoWheelerform.$submitted || twoWheelerform.PreviousOwner_Name.$touched" ng-messages="twoWheelerform.PreviousOwner_Name.$error" ng-messages-include="PreviousOwnerErrors.html">
+                         </div>
+                    </div>
+                    <div class="form-group" ng-hide="formData.OwnerType == '1st'">
+                        <label for="email">Country *</label>
+                        <select class="form-control" required data-ng-options="o.id as o.name for o in ownerCountryOptions" name="PreviousOwner_Country" data-ng-model="formData.PreviousOwnerCountry"  ng-change="getStateByCountry(formData.PreviousOwnerCountry,'PreviousOwner_State')" >
+                            <option value="">select country</option>
+                        </select>
+                         <div class="errors" ng-if="twoWheelerform.$submitted || twoWheelerform.PreviousOwner_Country.$touched" ng-messages="twoWheelerform.PreviousOwner_Country.$error" ng-messages-include="PreviousOwnerErrors.html">
+                         </div>
+                    </div>
+                    <div class="form-group" ng-hide="formData.OwnerType == '1st' || formData.PreviousOwnerCountry != 'IND'">
+                        <label for="email">State *</label>
+                        <select class="form-control" required data-ng-options="o.id as o.name for o in previousOwnerStateOptions" name="PreviousOwner_State" required  data-ng-model="formData.PreviousOwnerState"   ng-change="getDistricts(formData.PreviousOwnerCountry,formData.PreviousOwnerState,'PreviousOwner_District')" >
+                            <option value="">select state</option>
+                        </select>
+                         <div class="errors" ng-if="twoWheelerform.$submitted || twoWheelerform.PreviousOwner_State.$touched" ng-messages="twoWheelerform.PreviousOwner_State.$error" ng-messages-include="PreviousOwnerErrors.html">
+                         </div>
+                    </div>
+                    <div class="form-group" ng-hide="formData.OwnerType == '1st' || formData.PreviousOwnerCountry != 'IND'">
+                        <label for="email">District *</label>
+                        <select class="form-control" required data-ng-options="o.id as o.name for o in previousOwnerDistrictOptions" name="PreviousOwner_District" data-ng-model="formData.PreviousOwnerDistrict"   ng-change="getCities(formData.PreviousOwnerCountry,formData.PreviousOwnerState,formData.PreviousOwnerDistrict,'PreviousOwner_City')" >
+                            <option value="">select district</option>
+                        </select>
+                         <div class="errors" ng-if="twoWheelerform.$submitted || twoWheelerform.PreviousOwner_District.$touched" ng-messages="twoWheelerform.PreviousOwner_District.$error" ng-messages-include="PreviousOwnerErrors.html">
+                         </div>
+                    </div>
+                    <div class="form-group" ng-hide="formData.OwnerType == '1st' || formData.PreviousOwnerCountry != 'IND'">
+                        <label for="email">City *</label>
+                        <select class="form-control" required data-ng-options="o.id as o.name for o in previousOwnerCityOptions" name="PreviousOwner_City" data-ng-model="formData.PreviousOwnerCity">
+                            <option value="">select city</option>
+                        </select>
+                         <div class="errors" ng-if="twoWheelerform.$submitted || twoWheelerform.PreviousOwner_City.$touched" ng-messages="twoWheelerform.PreviousOwner_City.$error" ng-messages-include="PreviousOwnerErrors.html">
+                         </div>
+                    </div>
+                    <div class="form-group" ng-hide="formData.OwnerType == '1st'">
+                        <label for="email">Address *</label>
+                        <textarea class="form-control" required name="PreviousOwner_Address" ng-model="formData.PreviousOwnerAddress"></textarea>
+                        <div class="errors" ng-if="twoWheelerform.$submitted || twoWheelerform.PreviousOwner_Address.$touched" ng-messages="twoWheelerform.PreviousOwner_Address.$error" ng-messages-include="PreviousOwnerErrors.html">
+                         </div>
+                    </div>
+                     </div>
+                <div class="form-group">
+                        <div class="col-xs-6 col-xs-offset-3">
+                            <a ui-sref="twoWheeler.insurance" class="btn btn-block btn-info">Next Section <span class="glyphicon glyphicon-circle-arrow-right"></span>
+                            </a>
+                        </div>
+                    </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<script type="text/ng-template" id="OwnerErrors.html">
+    <div ng-message="required">You did not enter a value for this field.</div>
+    <div ng-message="date">You have entered an invalid date</div>
+    <div ng-message="error">You have entered an invalid value</div>
+    <div ng-message="pattern">Text only</div>
+    <div ng-message="notequalTo">Mobile No. and alternate Mobile No. cannot be same!</div>
+      <div ng-message="email">Please enter a valid email Id</div>
+</script>
+
+<script>
+
+    $(document).ready(function () {
+
+
+        $(".imageUploaderControl").fileinput({
+            uploadUrl: "http://localhost:4429/api/upload",
+            previewFileType: "image",
+            browseClass: "btn btn-success",
+            browseLabel: " Pick Image",
+            browseIcon: '<i class="glyphicon glyphicon-picture"></i>',
+            removeClass: "btn btn-danger",
+            removeLabel: " Delete",
+            removeIcon: '<i class="glyphicon glyphicon-trash"></i>',
+            uploadClass: "btn btn-info",
+            uploadLabel: " Upload",
+            uploadIcon: '<i class="glyphicon glyphicon-upload"></i>',
+            maxFileSize: 5000,
+            dropZoneEnabled: false,
+            overwriteInitial: true
+        });
+
+
+        $('.imageUploaderControl').on('fileuploaded', function (event, data, previewId, index) {
+
+            debugger;
+            var form = data.form, files = data.files, extra = data.extra,
+                response = data.response, reader = data.reader;
+
+            //console.log('File uploaded triggered');
+
+        });
+
+
+    });
+</script>

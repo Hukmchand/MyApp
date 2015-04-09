@@ -1,0 +1,55 @@
+﻿<section class="doublediagonal">
+    <div class="container">
+        <div class="section-heading">
+            <h2>Pre Registeration - Two wheeler</h2>
+            <div class="divider"></div>
+            Fields marked with * are required
+"Kindly read all the fields & collect data and then fill the forms."
+
+            <div class="loading-spiner-holder" ng-show="isloading">
+                <div class="loading-spiner">
+                    <img src="../../../Content/img/loading.gif" /></div>
+            </div>
+
+            <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <section id="preregisterForm">
+
+                    <div id="form-container">
+
+                        <div class="page-header text-center">
+
+
+                            <div id="status-buttons" class="text-center">
+                                <a ui-sref-active="active" ui-sref=".vehicle"><span>1</span>Vehicles Details</a>
+                                <a ui-sref-active="active" ui-sref=".owner"><span>2</span>Owner's Details</a>
+                                <a ui-sref-active="active" ui-sref=".insurance"><span>3</span> Insurance Details</a>
+                                <a ui-sref-active="active" ui-sref=".purchase"><span>4</span> Purchase Details</a>
+                            </div>
+
+
+                        </div>
+
+
+                        <form novalidate id="twoWheelerform" name="twoWheelerform" ng-submit="processForm(twoWheelerform.$valid,formData)" class="form-horizontal">
+                            <!-- our nested state views will be injected here -->
+                            <div id="form-views" ui-view></div>
+                        </form>
+                         
+                    </div>
+                   
+                    <!-- show our formData as it is being typed -->
+                   <!-- <pre>
+    {{ formData }}
+  </pre>-->
+
+
+                </section>
+            </div>
+
+        </div>
+         <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+    </div>
+</section>

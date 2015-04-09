@@ -1,0 +1,216 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <section>
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <div class="form-group">
+                        <label for="name">Make *</label>
+                        <select class="form-control" data-ng-options="o.id as o.name for o in vehicleMakeOptions" name="Vehicle_Make" required data-ng-model="formData.VehicleMake">
+                            <option value="">select vehicle make</option>
+                        </select>
+                        <div class="errors" ng-if="twoWheelerform.$submitted || twoWheelerform.Vehicle_Make.$touched" ng-messages="twoWheelerform.Vehicle_Make.$error" ng-messages-include="errors.html"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Model Variant *</label>
+                        <input type="text" class="form-control" name="Model_Variant" ng-model="formData.ModelVariant" required />
+                        <div class="errors" ng-if="twoWheelerform.$submitted || twoWheelerform.Model_Variant.$touched" ng-messages="twoWheelerform.Model_Variant.$error" ng-messages-include="errors.html"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Color</label>
+                        <input type="text" class="form-control" name="Vehicle_Color" ng-model="formData.VehicleColor" />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Country *</label>
+                        <select class="form-control" data-ng-options="o.id as o.name for o in countryOptions" name="Vehicle_Country" required ng-change="getStateByCountry(formData.VehicleCountry,'Vehicle_State')" data-ng-model="formData.VehicleCountry">
+                            <option value="">select country</option>
+                        </select>
+                        <div class="errors" ng-if="twoWheelerform.$submitted || twoWheelerform.Vehicle_Country.$touched" ng-messages="twoWheelerform.Vehicle_Country.$error" ng-messages-include="errors.html"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">State *</label>
+                        <select class="form-control" data-ng-options="o.id as o.name for o in stateOptions" name="Vehicle_State" required ng-change="getVehicleNoByState(formData.VehicleState)" data-ng-model="formData.VehicleState">
+                            <option value="">select state</option>
+                        </select>
+                        <div class="errors" ng-if="twoWheelerform.$submitted || twoWheelerform.Vehicle_State.$touched" ng-messages="twoWheelerform.Vehicle_State.$error" ng-messages-include="errors.html"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Vehicle No *</label>
+                        <div class="row">
+                            <div class="col-md-4 col-sm-4">
+                                <select class="form-control" data-ng-options="o.id as o.name for o in vehicleNoOptions" required name="VehicleNo_State" data-ng-model="formData.VehicleNoState">
+                                    <option value="">select vehicle no</option>
+                                </select>
+                                <div class="errors" ng-if="twoWheelerform.$submitted || twoWheelerform.VehicleNo_State.$touched" ng-messages="twoWheelerform.VehicleNo_State.$error" ng-messages-include="errors.html"></div>
+                            </div>
+                            <div class="col-md-3 col-sm-3">
+                                <input type="text" capitalize-first maxlength="2" ng-pattern="/^(\D)+$/" ng-required="formData.VehicleNoState != 'FOR REGN'"   ng-trim="false" class="form-control" name="VehicleNo_Area" ng-model="formData.VehicleNoArea" />
+                                <div class="errors" ng-if="twoWheelerform.$submitted || twoWheelerform.VehicleNo_Area.$touched" ng-messages="twoWheelerform.VehicleNo_Area.$error" ng-messages-include="errors.html"></div>
+                            </div>
+                            <div class="col-md-4 col-sm-4">
+                                <input type="number" min="1" max="9999" ng-required="formData.VehicleNoState != 'FOR REGN'" class="form-control" name="Vehicle_No" required ng-model="formData.VehicleNo" />
+                                <div class="errors" ng-if="twoWheelerform.$submitted || twoWheelerform.Vehicle_No.$touched" ng-messages="twoWheelerform.Vehicle_No.$error" ng-messages-include="errors.html"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Chassis No *</label>
+                        <div class="row">
+                            <div class="col-md-10 col-sm-10">
+                                <input type="text" capitalize-first class="form-control" required name="Chassis_No" ng-model="formData.ChassisNo" />
+                            </div>
+                            <div class="col-md-2 col-sm-2">
+
+                                <button tooltip="Click me to Get a help on entering Chassis & Engine No" type="button" class="btn btn-default" ng-click="open()">
+                                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true">Help</span>
+
+
+                                </button>
+                            </div>
+                        </div>
+                        <div class="errors" ng-if="twoWheelerform.$submitted || twoWheelerform.Chassis_No.$touched" ng-messages="twoWheelerform.Chassis_No.$error" ng-messages-include="errors.html"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Engine No *</label>
+                        <input type="text" capitalize-first class="form-control" required name="Engine_No" ng-model="formData.EngineNo" />
+                        <div class="errors" ng-if="twoWheelerform.$submitted || twoWheelerform.Engine_No.$touched" ng-messages="twoWheelerform.Engine_No.$error" ng-messages-include="errors.html"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Manufacture Year & Month </label>
+                        <div class="row">
+
+                            <div class="col-md-3 col-sm-3">
+                                <select class="form-control" data-ng-options="o.id as o.name for o in manufactureYearOptions" name="Manufacture_Year" data-ng-model="formData.ManufactureYear">
+                                    <option value="">select year</option>
+                                </select>
+                            </div>
+                            <div class="errors" ng-if="twoWheelerform.$submitted || twoWheelerform.Manufacture_Year.$touched" ng-messages="twoWheelerform.Manufacture_Year.$error" ng-messages-include="errors.html"></div>
+                            <div class="col-md-4 col-sm-4">
+                                <select class="form-control" name="Manufacture_Month" data-ng-model="formData.ManufactureMonth">
+                                    <option value="">select month</option>
+                                    <option value="01">JAN</option>
+                                    <option value="02">FEB</option>
+                                    <option value="03">MAR</option>
+                                    <option value="04">APR</option>
+                                    <option value="05">MAY</option>
+                                    <option value="06">JUN</option>
+                                    <option value="07">JUL</option>
+                                    <option value="08">AUG</option>
+                                    <option value="09">SEP</option>
+                                    <option value="10">OCT</option>
+                                    <option value="11">NOV</option>
+                                    <option value="12">DEC</option>
+                                </select>
+                            </div>
+                            <div class="errors" ng-if="twoWheelerform.$submitted || twoWheelerform.Manufacture_Month.$touched" ng-messages="twoWheelerform.Manufacture_Month.$error" ng-messages-include="errors.html"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Registration Date </label>
+
+                        <p class="input-group">
+                            <input type="text" class="form-control" datepicker-popup="dd-MMM-yyyy" ng-model="formData.RegistrationDate" is-open="dpOpened.opened1" required name="Registration_Date" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="openDatePicker($event,'opened1')"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                            <div class="errors" ng-if="twoWheelerform.$submitted || twoWheelerform.Registration_Date.$touched" ng-messages="twoWheelerform.Registration_Date.$error" ng-messages-include="errors.html"></div>
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Vehicle Photo</label>
+                        <span>
+                            <input class="imageUploaderControl" type="file" ng-model="formData.vehiclePhoto" id="vehiclePhoto" name="vehicle_Photo" accept="image/*" />
+                            <input id="vehiclePhotoFileName" type="hidden" ng-model="formData.vehiclePhotoFileName" />
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Registration certificate Copy Front Page *</label>
+                        <span>
+                            <input class="imageUploaderControl" valid-file type="file" ng-model="formData.rcCopyFrontPage" id="rcCopyFrontPage" name="rcCopyFront_Page" accept="image/*">
+                            <input id="rcCopyFrontPageFileName" type="hidden" ng-model="formData.rcCopyFrontPageFileName" />
+                            <div class="errors" ng-if="twoWheelerform.$submitted || twoWheelerform.rcCopyFront_Page.$touched || twoWheelerform.rcCopyFront_Page.$invalid" ng-messages="twoWheelerform.rcCopyFront_Page.$error" ng-messages-include="errors.html"></div>
+
+                            <span class="errors" ng-show="twoWheelerform.rcCopyFront_Page.$error.required">This is required!</span>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Registration certificate Copy Back Page</label>
+                        <span>
+                            <input class="imageUploaderControl" type="file" ng-model="formData.rcCopyBackPage" id="rcCopyBackPage" name="rcCopyBackPage" accept="image/*">
+                            <input type="hidden" id="rcCopyBackPageFileName" ng-model="formData.rcCopyBackPageFileName" value="d" />
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-6 col-xs-offset-3">
+                            <a ui-sref="twoWheeler.owner" class="btn btn-block btn-info">Next Section <span class="glyphicon glyphicon-circle-arrow-right"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/ng-template" id="errors.html">
+    <div ng-message="required">You did not enter a value for this field</div>
+    <div ng-message="date">You have entered an invalid date</div>
+    <div ng-message="error">You have entered an invalid value</div>
+    <div ng-message="pattern">Text only</div>
+     <div ng-message="max">Vehicle No should be 4 digits long</div>
+    <div ng-message="validFile">Registration certificate is required.Please upload a photocopy</div>
+     <div ng-message="file">Registration certificate is required.Please upload a photocopy</div>
+     <div ng-message="invalid">Registration certificate is required.Please upload a photocopy</div>
+</script>
+
+<script>
+
+    $(document).ready(function () {
+
+
+        $(".imageUploaderControl").fileinput({
+            uploadUrl: "http://localhost:4429/api/upload",
+            previewFileType: "image",
+            browseClass: "btn btn-success",
+            browseLabel: " Pick Image",
+            browseIcon: '<i class="glyphicon glyphicon-picture"></i>',
+            removeClass: "btn btn-danger",
+            removeLabel: " Delete",
+            removeIcon: '<i class="glyphicon glyphicon-trash"></i>',
+            uploadClass: "btn btn-info",
+            uploadLabel: " Upload",
+            uploadIcon: '<i class="glyphicon glyphicon-upload"></i>',
+            maxFileSize: 5000,
+            dropZoneEnabled: false,
+            overwriteInitial: true
+
+        });
+
+    });
+</script>
+<script type="text/ng-template" id="myModalContent.html">
+          <div class="modal-header">
+                    <div class="row">
+
+                        <div class="col-md-10 col-sm-10">
+                            <h3 class="modal-title">Chassis No Sample</h3>
+                        </div>
+                        <div class="col-md-2 col-sm-2">
+                            <button class="btn btn-warning" ng-click="cancel()">Close</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+
+                    <img src="../../../Content/img/part1.jpg" />
+                    <img src="../../../Content/img/part2.jpg" />
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-warning" ng-click="cancel()">Close</button>
+                </div>
+</script>

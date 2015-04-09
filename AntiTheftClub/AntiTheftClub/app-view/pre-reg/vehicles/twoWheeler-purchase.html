@@ -1,0 +1,91 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <section>
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-6 col-sm-6">
+
+                    <div class="form-group">
+                        <label for="email">Shop Name</label>
+                        <input type="text" class="form-control" name="email" ng-model="formData.ShopName" />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Country</label>
+                        <select class="form-control" data-ng-options="o.id as o.name for o in ownerCountryOptions" name="Purchase_Country" data-ng-model="formData.PurchaseCountry" ng-change="getStateByCountry(formData.PurchaseCountry,'Purchase_State')">
+                            <option value="">select country</option>
+                        </select>
+                        <div class="errors" ng-if="twoWheelerform.$submitted || twoWheelerform.Purchase_Country.$touched" ng-messages="twoWheelerform.Purchase_Country.$error" ng-messages-include="PurchaseErrors.html">
+                        </div>
+                    </div>
+                    <div class="form-group" ng-hide="formData.PurchaseCountry != 'IND'">
+                        <label for="email">State</label>
+                        <select class="form-control" data-ng-options="o.id as o.name for o in purchaseStateOptions" name="Purchase_State" required data-ng-model="formData.PurchaseState" ng-change="getDistricts(formData.PurchaseCountry,formData.PurchaseState,'Purchase_District')">
+                            <option value="">select state</option>
+                        </select>
+                        <div class="errors" ng-if="twoWheelerform.$submitted || twoWheelerform.Purchase_State.$touched" ng-messages="twoWheelerform.Purchase_State.$error" ng-messages-include="PurchaseErrors.html">
+                        </div>
+                    </div>
+                    <div class="form-group" ng-hide="formData.PurchaseCountry != 'IND'">
+                        <label for="email">District</label>
+                        <select class="form-control" data-ng-options="o.id as o.name for o in purchaseDistrictOptions" name="Purchase_District" data-ng-model="formData.PurchaseDistrict" ng-change="getCities(formData.PurchaseCountry,formData.PurchaseState,formData.PurchaseDistrict,'Purchase_City')">
+                            <option value="">select district</option>
+                        </select>
+                        <div class="errors" ng-if="twoWheelerform.$submitted || twoWheelerform.Purchase_District.$touched" ng-messages="twoWheelerform.Purchase_District.$error" ng-messages-include="PurchaseErrors.html">
+                        </div>
+                    </div>
+                    <div class="form-group" ng-hide="formData.PurchaseCountry != 'IND'">
+                        <label for="email">City</label>
+                        <select class="form-control" data-ng-options="o.id as o.name for o in purchaseCityOptions" name="Purchase_City" data-ng-model="formData.PurchaseCity">
+                            <option value="">select city</option>
+                        </select>
+                        <div class="errors" ng-if="twoWheelerform.$submitted || twoWheelerform.Purchase_City.$touched" ng-messages="twoWheelerform.Purchase_City.$error" ng-messages-include="PurchaseErrors.html">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Shop Address</label>
+                        <textarea class="form-control" name="Purchase_Address" ng-model="formData.PurchaseAddress" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Purchase Date</label>
+                        <p class="input-group">
+                            <input type="text" class="form-control" datepicker-popup="dd-MM-yyyy" ng-model="formData.PurchaseDate" is-open="opened" ng-required="true" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="openDatePicker($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Invoice No: </label>
+                        <input type="text" class="form-control" name="Purchase_InvoiceNo" ng-model="formData.PurchaseInvoiceNo" />
+
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Other Details : </label>
+                        <input type="text" class="form-control" name="Purchase_Comments" ng-model="formData.PurchaseComments" />
+
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4 col-sm-4">
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/ng-template" id="PurchaseErrors.html">
+    <div ng-message="required">You did not enter a value for this field.</div>
+    <div ng-message="date">You have entered an invalid date</div>
+    <div ng-message="error">You have entered an invalid value</div>
+    <div ng-message="pattern">Text only</div>
+    <div ng-message="notequalTo">Mobile No. and alternate Mobile No. cannot be same!</div>
+      <div ng-message="email">Please enter a valid email Id</div>
+</script>

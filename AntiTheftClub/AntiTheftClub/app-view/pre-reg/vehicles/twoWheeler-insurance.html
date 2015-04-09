@@ -1,0 +1,55 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <div class="row">
+            <section>
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-6 col-sm-6">
+
+                    <div class="form-group">
+                        <label for="email">Company Name</label>
+                        <input type="text" class="form-control" name="InsuranceCompany_Name" ng-model="formData.InsuranceCompanyName" />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Policy Number</label>
+                        <input type="text" class="form-control" name="email" ng-model="formData.InsurancePolicyNo" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Policy Start Date</label>
+                        <p class="input-group">
+                            <input type="text" class="form-control" datepicker-popup="dd-MMM-yyyy" name="Insurance_StartDate" is-open="dpOpened.opened2" datepicker-popup="dd-MM-yyyy" ng-model="formData.InsuranceStartDate" ng-required="true" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default"  ng-click="openDatePicker($event,'opened2')"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Policy End Date</label>
+                        <p class="input-group">
+                            <input type="text" class="form-control" datepicker-popup="dd-MMM-yyyy" name="Insurance_EndDate" is-open="dpOpened.opened3" datepicker-popup="dd-MM-yyyy" ng-model="formData.InsuranceEndDate" ng-required="true" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default"  ng-click="openDatePicker($event,'opened3')"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Comments</label>
+                        <textarea class="form-control" name="email" ng-model="formData.InsuranceComments" />
+
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-6 col-xs-offset-3">
+                            <a ui-sref="twoWheeler.purchase" class="btn btn-block btn-info">Next Section <span class="glyphicon glyphicon-circle-arrow-right"></span>
+                            </a>
+                            <a ui-sref="twoWheeler.purchase" class="btn btn-block btn-info">Skip<span class="glyphicon glyphicon-circle-arrow-right"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
