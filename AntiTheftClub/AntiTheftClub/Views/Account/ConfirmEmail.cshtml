@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "Confirm Email";
+}
+
+<h2>@ViewBag.Title.</h2>
+<section id="info" class="doublediagonal">
+    <div class="container">
+        <div class="section-heading scrollpoint sp-effect3">
+            <h3>Thank you for confirming your email. Please @Html.ActionLink("Click here to Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</h3>
+            <div class="divider"></div>
+            <p></p>
+        </div>
+    </div>
+</section>

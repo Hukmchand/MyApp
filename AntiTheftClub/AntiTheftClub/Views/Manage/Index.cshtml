@@ -1,0 +1,72 @@
+﻿@model AntiTheftClub.Models.IndexViewModel
+@{
+    ViewBag.Title = "Manage";
+}
+
+<section id="signup" class="doublediagonal">
+    <div class="container">
+        <div class="section-heading scrollpoint sp-effect3">
+            <h2>Manage</h2>
+            <div class="divider"></div>
+            <p>Change your account settings</p>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+
+
+
+<div>
+    <h4>Change your account settings</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Password:</dt>
+        <dd>[
+         @if (Model.HasPassword)
+         {
+             @Html.ActionLink("Change your password", "ChangePassword")
+         }
+         else
+         {
+             @Html.ActionLink("Create", "SetPassword")
+         }
+            ]
+        </dd>
+        @*<dt>External Logins:</dt>
+        <dd>
+            @Model.Logins.Count [
+         @Html.ActionLink("Manage", "ManageLogins") ]
+        </dd>*@
+        <dt>Phone Number:</dt>
+        <dd>
+            @(Model.PhoneNumber ?? "None") [
+         @if (Model.PhoneNumber != null)
+         {
+             @Html.ActionLink("Change", "AddPhoneNumber")
+         }
+         else
+         {
+             @Html.ActionLink("Add", "AddPhoneNumber")
+         }
+            ]
+        </dd>
+        <dt>Full Name:</dt>
+        <dd>
+            @(Model.FullName ?? "None") [
+         @if (Model.FullName != null)
+         {
+             @Html.ActionLink("Change", "FullName")
+         }
+            ]
+        </dd>
+
+
+
+    </dl>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+

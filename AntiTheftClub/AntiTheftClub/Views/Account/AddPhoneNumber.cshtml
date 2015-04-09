@@ -1,0 +1,39 @@
+﻿@model AntiTheftClub.Models.AddPhoneNumberViewModel
+@{
+    ViewBag.Title = "Phone Number";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+@using (Html.BeginForm("AddPhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Add a phone number</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        <div class="col-md-10">
+             <input class="form-control col-md-2 control-label" data-val="true" data-val-required="The Mobile Number field is required." id="Number" 
+                                        name="Number" type="tel" autocomplete="off"   data-toggle="popover" data-trigger="focus"  title="Mobile Number" 
+                                        data-content="Give your valid 10 digits mobile no,for Indian exclude 91 & 0 to keeping your account secure.For Exampe, we send you security Code to ativate and manage your account">
+            @Html.TextBoxFor(m => m.Number, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Submit" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script>
+    $(function () {
+        $('[data-toggle="popover"]').popover({
+            container: 'body'
+        });
+    });
+</script>

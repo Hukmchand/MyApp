@@ -1,0 +1,201 @@
+﻿@model AntiTheftClub.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+    
+}
+
+@section styles {
+    <link rel="stylesheet" href="~/Content/utility/intlTelInput.css">
+
+}
+
+<section id="signup" class="doublediagonal">
+    <div class="container">
+        <div class="section-heading scrollpoint sp-effect3">
+            <h2>Sign up</h2>
+            <div class="divider"></div>
+            <p>Create a new account</p>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <section id="registerSection">
+                        <div class="col-md-3">
+                         </div>
+                        <div class="col-md-6 col-sm-6 scrollpoint sp-effect1">
+                           <form action="/Account/Register" class="" id="registerForm" method="post" role="form" novalidate>
+                            
+                                @Html.AntiForgeryToken()
+                                <div class="bg-danger">
+                                    @Html.ValidationSummary(true)
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.FullName)
+                                    @Html.TextBoxFor(m => m.FullName, new { @class = "form-control", placeholder = "Full Name" })
+                                    @*<span class="glyphicon glyphicon-user form-control-feedback"></span>*@
+                                    @Html.ValidationMessageFor(m => m.FullName)
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Email)
+                                     @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Email", data_toggle="popover" ,data_trigger="focus",  title="Email" ,
+                                        data_content="Give a Valid E-Maid Id as your Login id to access your Accounts."})
+                                    @*<span class="glyphicon glyphicon-envelope form-control-feedback"></span>*@
+                                    @Html.ValidationMessageFor(m => m.Email)
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.MobileNumber)
+                                     @Html.TextBoxFor(m => m.MobileNumber, new { @class = "form-control", id = "mobile-number", type = "tel",data_toggle="popover" ,data_trigger="focus" , title="Mobile Number" ,
+                                        data_content="Give your valid 10 digits mobile no,for Indian exclude 91 & 0 to keeping your account secure.For Exampe, we send you security Code to ativate and manage your account" })
+                                    <span id="valid-msg" style="color: #468847;" class="hide">✓ Valid</span>
+                                    <span id="error-msg" class="hide field-validation-error">Invalid number</span>
+                                    @Html.ValidationMessageFor(m => m.MobileNumber)
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Password)
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control",data_toggle="popover", data_trigger="focus" , title="Password" ,
+                                        data_content="Use At least 6 Characters.Dont Use too obivous line. Using numbers, symbols and mix of upper and lower case letters in your password makes it harder for someone to guess your password" })
+                                    @*<span class="glyphicon glyphicon-lock form-control-feedback"></span>*@
+                                    @Html.ValidationMessageFor(m => m.Password)
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.ConfirmPassword)
+                                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control",data_toggle="popover", data_trigger="focus" , title="Password" ,
+                                        data_content="Use At least 6 Characters.Dont Use too obivous line. Using numbers, symbols and mix of upper and lower case letters in your password makes it harder for someone to guess your password" })
+                                    @* <span class="glyphicon glyphicon-lock form-control-feedback"></span>*@
+                                    @Html.ValidationMessageFor(m => m.ConfirmPassword)
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        @Html.EditorFor(m => m.IsAgree)
+                                        <span id="terms-of-service-label">
+                                            <strong>I agree to the Antitheftclub.com <a target="_blank" id="TosLink" href="#">Terms and Conditions</a></strong>
+                                        </span>
+                                        <br />
+                                        @Html.ValidationMessageFor(m => m.IsAgree)
+                                    </label>
+                                </div>
+            
+                                <button type="submit" value="Register" class="btn btn-success" >Register</button>
+            
+                                <p>
+
+                                    @Html.ActionLink("Sign In", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" }) if you already have an account.
+              
+                                </p>
+            
+                                @Html.HiddenFor(ed => ed.CountryCode, new { id = "CountryCode" })
+                                @Html.HiddenFor(ed => ed.CountryDailCode, new { id = "CountryDailCode" })
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+       <script src="~/Scripts/utility/intlTelInput.js"></script>
+       <script src="~/Scripts/utility/countryDropdown.js"></script>
+    
+    <script>
+
+
+        $(document).ready(function () {
+
+            var telInput = $("#mobile-number"),
+                errorMsg = $("#error-msg"),
+                validMsg = $("#valid-msg");
+
+            // initialise plugin
+            telInput.intlTelInput({
+                allowExtensions: false,
+                autoFormat: false,
+                autoHideDialCode: true,
+                autoPlaceholder: false,
+                defaultCountry: "auto",
+                //ipinfoToken: "yolo",
+                nationalMode: true,
+                numberType: "MOBILE",
+                //onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+                preferredCountries: ['in'],
+                preventInvalidNumbers: true
+
+            });
+
+            function validateCountryDropdown() {
+
+                if ($.trim(telInput.val())) {
+                    if (telInput.intlTelInput("isValidNumber")) {
+                        validMsg.removeClass("hide");
+                        validMsg.addClass("correct");
+                    } else {
+                        telInput.addClass("error");
+                        errorMsg.removeClass("hide");
+                        validMsg.addClass("hide");
+                        validMsg.removeClass("correct");
+                    }
+                }
+            }
+
+            $(function () {
+                $('[data-toggle="popover"]').popover({
+                    container: 'body'
+                });
+            });
+
+
+            // on blur: validate
+            telInput.blur(function () {
+                if ($.trim(telInput.val())) {
+                    validateCountryDropdown();
+                }
+            });
+
+
+            // on keydown: reset
+            telInput.keydown(function () {
+                telInput.removeClass("error");
+                errorMsg.addClass("hide");
+                validMsg.addClass("hide");
+                validMsg.removeClass("correct");
+               
+            });
+
+
+            $("#registerForm").submit(function (event) {
+
+                var isValid = $("#mobile-number").intlTelInput("isValidNumber");
+
+                var country = $("#mobile-number").intlTelInput("getSelectedCountryData");
+
+                $("#CountryCode").val(country.iso2);
+                $("#CountryDailCode").val(country.dialCode);
+
+                if (isValid) {
+                    return;
+                }
+                else {
+                    $("#error-msg").removeClass("hide");
+                    $("#mobile-number").addClass("error");
+                }
+
+
+
+                //$("span").text("Not valid!").show().fadeOut(1000);
+                event.preventDefault();
+            });
+
+        });
+
+        
+    </script>
+
+
+}
+
+
+
+
